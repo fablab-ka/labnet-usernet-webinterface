@@ -1,2 +1,2 @@
 # usernet-webinterface
-Webinterface to manage users
+Webinterface to manage usernet users
