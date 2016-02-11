@@ -19104,25 +19104,108 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _main = require('./pages/main.jsx');
+
+var _main2 = _interopRequireDefault(_main);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var HelloMessage = _react2.default.createClass({
-  displayName: 'HelloMessage',
+_reactDom2.default.render(_react2.default.createElement(_main2.default, null), document.getElementById('main-container'));
 
-  render: function render() {
-    return _react2.default.createElement(
-      'div',
-      null,
-      'Hello2 ',
-      this.props.name
-    );
-  }
+},{"./pages/main.jsx":160,"react":158,"react-dom":2}],160:[function(require,module,exports){
+'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
 
-_reactDom2.default.render(_react2.default.createElement(HelloMessage, { name: 'John' }), document.getElementById('main-container'));
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-},{"react":158,"react-dom":2}]},{},[159])
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MainPage = function (_React$Component) {
+  _inherits(MainPage, _React$Component);
+
+  function MainPage(props) {
+    _classCallCheck(this, MainPage);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(MainPage).call(this, props));
+
+    _this.state = {
+      users: []
+    };
+    return _this;
+  }
+
+  _createClass(MainPage, [{
+    key: 'onAddUserClicked',
+    value: function onAddUserClicked() {
+      var users = this.state.users;
+
+      users.push({ name: 'User ' + (this.state.users.length + 1) });
+
+      this.setState({ users: users });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {}
+  }, {
+    key: 'renderUser',
+    value: function renderUser(user) {
+      return _react2.default.createElement(
+        'li',
+        { key: user.name },
+        user.name
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'main-page' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Users'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'controls' },
+          _react2.default.createElement(
+            'button',
+            { onClick: this.onAddUserClicked.bind(this) },
+            'Add User'
+          )
+        ),
+        _react2.default.createElement(
+          'ul',
+          { className: 'user-list' },
+          this.state.users.map(this.renderUser.bind(this))
+        )
+      );
+    }
+  }]);
+
+  return MainPage;
+}(_react2.default.Component);
+
+MainPage.propTypes = {};
+MainPage.defaultProps = {};
+exports.default = MainPage;
+
+},{"react":158}]},{},[159])
 
 
 //# sourceMappingURL=index.js.map
