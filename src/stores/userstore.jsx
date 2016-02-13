@@ -38,16 +38,22 @@ class UserStore {
   }
 
   handleAddUser(user) {
+    console.log('[UserStore] handleAddUser', user);
+
     this.users.push(user);
   }
 
   handleUpdateUsers(users) {
+    console.log('[UserStore] handleUpdateUsers');
+
     this.users = users;
     this.errorMessage = null;
     this.loading = false;
   }
 
   handleFetchUsers() {
+    console.log('[UserStore] handleFetchUsers');
+
     // reset the array while we're fetching new users so React can
     // be smart and render a spinner for us since the data is empty.
     this.users = [];
@@ -55,6 +61,8 @@ class UserStore {
   }
 
   handleFetchUsersFailed(errorMessage) {
+    console.log('[UserStore] handleFetchUsersFailed', errorMessage);
+
     this.errorMessage = errorMessage;
   }
 }

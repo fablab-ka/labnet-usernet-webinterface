@@ -18,7 +18,9 @@ class UserActions {
     }
   }
 
-  update(users) { }
+  update(users) {
+    return users;
+  }
 
   fetch() {
     return (dispatch) => {

@@ -1,14 +1,12 @@
 import request from 'superagent';
-import Config from '../../config.js';
 
 var UserSource = {
   fetch: function () {
     console.log('[UserSource] fetching users');
 
     return new Promise(function (resolve, reject) {
-
       request
-        .get(Config.usernetUrl + '/users')
+        .get(window.configuration.usernetUrl + '/users')
         .set('Accept', 'application/json')
         .end(function(err, res){
           if (err) {
@@ -18,7 +16,7 @@ var UserSource = {
           }
 
           console.log('[UserSource] fetching users successful retrieved users', res);
-          resolve(res);
+          resolve(res.body);
         });
     });
   },
@@ -29,7 +27,7 @@ var UserSource = {
     return new Promise(function (resolve, reject) {
 
       request
-        .post(Config.usernetUrl + '/users')
+        .post(window.configuration.usernetUrl + '/users')
         .send(user)
         .set('Accept', 'application/json')
         .end(function(err, res){
@@ -40,7 +38,7 @@ var UserSource = {
           }
 
           console.log('[UserSource] fetching users successful retrieved users', res);
-          resolve(res);
+          resolve(res.body);
         });
     });
   }

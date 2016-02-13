@@ -21,7 +21,13 @@ class MainPage extends React.Component {
   }
 
   onAddUserClicked() {
-    UserActions.add({ name: 'User ' + (this.state.users.length + 1) });
+    UserActions.add({
+      name: 'User ' + (this.state.users.length + 1),
+      email: 'user@users.de',
+      roles: ['labsitter'],
+      machinePermissions: [ 'de Bohra' ],
+      digitalKeys: [ '12345' ]
+    });
   }
 
   componentDidMount() {
@@ -42,7 +48,13 @@ class MainPage extends React.Component {
   }
 
   renderUser(user) {
-    return <li key={user.name}>{user.name}</li>;
+    return <li key={user.name}>
+      <span>{user.name}</span>
+      <span>{user.email}</span>
+      <span>{user.roles.join(', ')}</span>
+      <span>{user.machinePermissions.join(', ')}</span>
+      <span>{user.digitalKeys.join(', ')}</span>
+    </li>;
   }
 
   render() {

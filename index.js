@@ -15,7 +15,9 @@ app.use(partials.middleware());
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('index', {
+    usernetUrl: config.usernetUrl
+  });
 });
 
 var server = app.listen(config.port, function () {
