@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/fablab-ka/usernet-webinterface#readme",
   "dependencies": {
+    "alt": "^0.18.2",
     "express": "^4.13.3",
     "hogan-express": "^0.5.2",
-    "hogan-express-partials": "0.0.3"
+    "hogan-express-partials": "0.0.3",
+    "superagent": "^1.7.2"
   },
   "devDependencies": {
     "babel": "^6.3.17",

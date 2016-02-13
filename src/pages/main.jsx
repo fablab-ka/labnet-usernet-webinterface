@@ -1,5 +1,8 @@
 import React from 'react';
 
+import UserActions from '../actions/useractions';
+import UserStore from '../stores/userstore';
+
 class MainPage extends React.Component {
   static propTypes = {
   };
@@ -11,19 +14,31 @@ class MainPage extends React.Component {
     super(props);
 
     this.state = {
-      users: []
+      users: UserStore.getUsers(),
+      errorMessage: UserStore.getErrorMessage(),
+      userListLoading: UserStore.getLoading()
     };
   }
 
   onAddUserClicked() {
-    let users = this.state.users;
-
-    users.push({ name: 'User ' + (this.state.users.length + 1) });
-
-    this.setState({ users });
+    UserActions.add({ name: 'User ' + (this.state.users.length + 1) });
   }
 
   componentDidMount() {
+    this.onChange = this.onChange.bind(this);
+    UserStore.listen(this.onChange);
+
+    UserActions.fetch();
+  }
+
+  componentWillUnmount() {
+    UserStore.unlisten(this.onChange);
+  }
+
+  onChange(state) {
+    this.setState({
+      users: state.users
+    });
   }
 
   renderUser(user) {
@@ -31,18 +46,33 @@ class MainPage extends React.Component {
   }
 
   render() {
+    console.log('[MainPage] render', this.state.users);
+
+    let content;
+
+    if (this.state.errorMessage) {
+      content = <div className="error-message">{this.state.errorMessage}</div>;
+    } else if (this.userListLoading) {
+      content = <div className="loader">Loading...</div>;
+    } else if (this.state.users.length <= 0) {
+      content = <div className="info-message">No Users defined yet</div>;
+    } else {
+      content = <ul className="user-list">
+                  {this.state.users.map(this.renderUser.bind(this))}
+                </ul>;
+    }
 
     return (
       <div className="main-page">
-        <h1>Users</h1>
+        <div className="main-header">
+          <h1>Users</h1>
 
-        <div className="controls">
-          <button onClick={this.onAddUserClicked.bind(this)}>Add User</button>
+          <div className="controls">
+            <button onClick={this.onAddUserClicked.bind(this)}>Add User</button>
+          </div>
         </div>
 
-        <ul className="user-list">
-          {this.state.users.map(this.renderUser.bind(this))}
-        </ul>
+        {content}
       </div>
     );
   }

@@ -11,6 +11,7 @@ var livereload = require('gulp-livereload');
 
 var customOpts = {
   entries: ['./src/index.jsx'],
+  extensions: ['.jsx'],
   debug: true
 };
 var opts = assign({}, watchify.args, customOpts);
@@ -37,4 +38,10 @@ gulp.task('js', function() {
   return bundle();
 });
 
-gulp.task('default', ['js']);
+gulp.task('server', function(done) {
+  require('./index.js');
+
+  done();
+});
+
+gulp.task('default', ['server', 'js']);
