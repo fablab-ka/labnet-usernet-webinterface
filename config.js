@@ -1,4 +1,4 @@
 module.exports = {
-  usernetUrl: 'http://labnet:4020/api',
+  usernetUrl: process.env.usernetUrl || 'http://usernet/api',
   port: 4070
 };
